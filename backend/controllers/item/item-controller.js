@@ -20,4 +20,10 @@ const createItem = async (req, res) => {
   }
 };
 
+const getAllitem = async (req, res) => {
+  const item = await Item.find({});
+  res.json(item);
+};
+
+exports.getAllitem = getAllitem;
 exports.createItem = createItem;

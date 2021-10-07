@@ -23,11 +23,8 @@ const Login = () => {
       .then((res) => {
         if (res.status === 200) {
           setlogin(res);
-          localStorage.setItem("CustomerIsLoggedIn", true);
-          localStorage.setItem("CustomerID", res.data._id);
-          localStorage.setItem("CustomerEmail", res.data.email);
 
-          history.push(`/customerProfile`);
+          history.push(`/Supplier/additem`);
           window.location.reload();
         } else {
           alert("Login failed please try again");
@@ -48,7 +45,7 @@ const Login = () => {
             <div class="col-md-6 mx-auto">
               <div class="card">
                 <div class="card-header">
-                  <h4>Customer Login</h4>
+                  <h4>Supplier Login</h4>
                 </div>
                 <div class="card-body">
                   <form onSubmit={submitHandler}>

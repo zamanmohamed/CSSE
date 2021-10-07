@@ -8,7 +8,7 @@ import Home from "../home";
 import AdminPayment from "../Mannagement/admin/adminPayment";
 import Login from "./login";
 import Additem from "./additem";
-
+import Getitem from "./getitem";
 const admin = () => {
   return (
     <React.Fragment>
@@ -41,14 +41,13 @@ const admin = () => {
 
                     <div id="collapse5" class="collapse">
                       <div class="card-body">
-                        <a href="#" class="dropdown-item">
+                        <a href="/Supplier/additem" class="dropdown-item">
                           Add Item
                         </a>
-                        <a href="#" class="dropdown-item">
-                          Link 2
-                        </a>
-                        <a href="#" class="dropdown-item">
-                          Link 3
+                      </div>
+                      <div class="card-body">
+                        <a href="/Supplier/getitem" class="dropdown-item">
+                          Get Item
                         </a>
                       </div>
                     </div>
@@ -68,6 +67,9 @@ const admin = () => {
                 </Route>
                 <Route path="/Supplier/additem" exact>
                   <Additem />
+                </Route>
+                <Route path="/Supplier/getitem" exact>
+                  <Getitem />
                 </Route>
                 <Route path="/Supplier" exact>
                   <Login />

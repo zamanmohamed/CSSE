@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import axios from "axios";
 
-const additem = () => {
+const Additem = () => {
+  const nameRef = useRef("");
+  const priceRef = useRef("");
+  const quantityRef = useRef("");
+
+  const history = useHistory();
+
+  async function add() {
+    axios
+      .post("http://localhost:5000/api/item/", {
+        name: nameRef.current.value,
+        price: priceRef.current.value,
+        quantity: quantityRef.current.value,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          history.push(`/`);
+          window.location.reload();
+        } else {
+          alert("Registation failed please try again");
+        }
+      });
+  }
+
   return (
     <div>
       <br></br>
@@ -14,19 +39,23 @@ const additem = () => {
                   <h1>Supplier Add Item</h1>
                 </div>
                 <div class="card-body">
-                  <form action="index.html">
+                  <form onSubmit={add}>
                     <div class="form-group">
                       <label for="email">Item Name</label>
-                      <input type="text" class="form-control" />
+                      <input type="text" class="form-control" ref={nameRef} />
                     </div>
                     <div class="form-group">
                       <label for="password">quantity</label>
-                      <input type="password" class="form-control" />
+                      <input
+                        type="text"
+                        class="form-control"
+                        ref={quantityRef}
+                      />
                     </div>
 
                     <div class="form-group">
-                      <label for="password">Price</label>
-                      <input type="password" class="form-control" />
+                      <label for="text">Price</label>
+                      <input type="text" class="form-control" ref={priceRef} />
                     </div>
                     <input
                       type="submit"
@@ -44,4 +73,4 @@ const additem = () => {
   );
 };
 
-export default additem;
+export default Additem;

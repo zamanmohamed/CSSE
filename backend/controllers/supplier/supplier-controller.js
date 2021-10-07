@@ -23,7 +23,7 @@ const signupcustomer = async (req, res) => {
 const logincustomer = async (req, res) => {
   const { email, password } = req.body;
 
-  let existingUser = await AccountingStaff.findOne({ email: email });
+  let existingUser = await Supplier.findOne({ email: email });
 
   if (!existingUser || existingUser.password !== password) {
     console.log("Error");
