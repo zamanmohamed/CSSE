@@ -4,15 +4,17 @@ import detalis from "../../details.jpg";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
-const CutomerPaymentHistory = () => {
+const ApprovedOrder = () => {
   const [pay, setpay] = useState([]);
+  const [das, setdes] = useState([]);
   let x = 0;
 
   useEffect(() => {
     const sendRequest = async () => {
       await axios
-        .post("http://localhost:5000/api/payments/email", {
+        .post("http://localhost:5000/api/payments/approve", {
           email: localStorage.getItem("CustomerEmail"),
+          state: "Approved",
         })
         .then((res) => {
           setpay(res.data.paymentemail);
@@ -93,4 +95,4 @@ const CutomerPaymentHistory = () => {
   );
 };
 
-export default CutomerPaymentHistory;
+export default ApprovedOrder;

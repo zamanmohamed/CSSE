@@ -2,8 +2,16 @@ const Payment = require("../../model/payment/payment");
 
 const createPayment = async (req, res) => {
   if (req.body) {
-    const { firstname, lastname, address, city, phone, email, totalPrice } =
-      req.body;
+    const {
+      firstname,
+      lastname,
+      address,
+      city,
+      phone,
+      email,
+      totalPrice,
+      description,
+    } = req.body;
 
     const payment = new Payment({
       firstname,
@@ -13,6 +21,7 @@ const createPayment = async (req, res) => {
       phone,
       email,
       totalPrice,
+      description,
       state: "pending",
     });
     await payment
@@ -41,6 +50,12 @@ const getpayment = async (req, res) => {
 const paymentEmail = async (req, res) => {
   const { email } = req.body;
   const paymentemail = await Payment.find({ email: email });
+  res.status(200).send({ paymentemail });
+};
+
+const paymentApprove = async (req, res) => {
+  const { email, state } = req.body;
+  const paymentemail = await Payment.find({ email: email, state: state });
   res.status(200).send({ paymentemail });
 };
 
@@ -76,3 +91,4 @@ exports.updateState = updateState;
 exports.getAllpayment = getAllpayment;
 exports.paymentEmail = paymentEmail;
 exports.deletePayment = deletePayment;
+exports.paymentApprove = paymentApprove;

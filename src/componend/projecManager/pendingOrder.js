@@ -4,15 +4,16 @@ import detalis from "../../details.jpg";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
 
-const CutomerPaymentHistory = () => {
+const PendingOrder = () => {
   const [pay, setpay] = useState([]);
   let x = 0;
 
   useEffect(() => {
     const sendRequest = async () => {
       await axios
-        .post("http://localhost:5000/api/payments/email", {
+        .post("http://localhost:5000/api/payments/approve", {
           email: localStorage.getItem("CustomerEmail"),
+          state: "pending",
         })
         .then((res) => {
           setpay(res.data.paymentemail);
@@ -22,6 +23,13 @@ const CutomerPaymentHistory = () => {
   }, []);
 
   console.log(pay);
+
+  async function Deleteorder(ID) {
+    await fetch(`http://localhost:5000/api/payments/${ID}`, {
+      method: "DELETE",
+    });
+    window.location.reload();
+  }
 
   return (
     <React.Fragment>
@@ -84,6 +92,14 @@ const CutomerPaymentHistory = () => {
                 </td>
                 <td>{pay.totalPrice} K</td>
                 <td>{pay.state}</td>
+                <td>
+                  <button
+                    className="btn btn-danger btn-block"
+                    onClick={() => Deleteorder(pay._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             </tbody>
           ))}
@@ -93,4 +109,4 @@ const CutomerPaymentHistory = () => {
   );
 };
 
-export default CutomerPaymentHistory;
+export default PendingOrder;

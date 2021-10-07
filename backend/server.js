@@ -38,13 +38,22 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect(uri, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 const connection = mongoose.connection;
-connection.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-});
+connection
+  .once("open", () => {
+    console.log("MongoDB database connection established successfully");
+  })
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`server is running on port ${port}`);
+    });
+  });
 
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
-});
+module.exports = app;

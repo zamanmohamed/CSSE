@@ -11,6 +11,7 @@ const paymentSchema = new Schema({
   email: { type: String, required: true },
   totalPrice: { type: Number, required: true },
   state: { type: String, required: true },
+  description: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Payment", paymentSchema);

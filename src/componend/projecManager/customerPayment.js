@@ -11,6 +11,7 @@ const CustomerPayment = () => {
   const [address, setaddress] = useState("");
   const [city, setcity] = useState("");
   const Budget = useRef("");
+  const Description = useRef("");
 
   const history = useHistory();
 
@@ -42,12 +43,14 @@ const CustomerPayment = () => {
         phone: profile.phone,
         email: profile.email,
         totalPrice: Budget.current.value,
+        description: Description.current.value,
       })
       .then((res) => {
         if (res.status === 200) {
-          alert("ok");
+          alert("Order is going to pending state");
+          history.push("/paymentHistory");
         } else {
-          alert("Payment failed please try again");
+          alert("Orderd failed please try again");
         }
       });
   }
@@ -107,6 +110,7 @@ const CustomerPayment = () => {
                           onChange={(e) => {
                             profile.address = setaddress(e.target.value);
                           }}
+                          readOnly
                           required
                         />
                       </div>
@@ -121,16 +125,21 @@ const CustomerPayment = () => {
                           onChange={(e) => {
                             profile.city = setcity(e.target.value);
                           }}
+                          readOnly
                           required
                         />
                       </div>
 
                       <div class="form-group">
                         <label for="Credit">description about Buddjet</label>
-                        <textarea class="form-control" required></textarea>
+                        <textarea
+                          class="form-control"
+                          ref={Description}
+                          required
+                        ></textarea>
                       </div>
                       <div class="form-group">
-                        <label for="CVS">Buddjet</label>
+                        <label for="CVS">Buddjet (K)</label>
                         <input
                           type="number"
                           ref={Budget}

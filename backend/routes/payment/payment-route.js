@@ -7,5 +7,6 @@ router.get("/get/:id", paymentControllers.getpayment);
 router.patch("/state/:id", paymentControllers.updateState);
 router.get("/get", paymentControllers.getAllpayment);
 router.post("/email", paymentControllers.paymentEmail);
+router.post("/approve", paymentControllers.paymentApprove);
 router.delete("/:id", paymentControllers.deletePayment);
 module.exports = router;

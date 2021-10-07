@@ -27,7 +27,7 @@ const AdminPaymentItem = ({ payment }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          state: "Delivered",
+          state: "Reject",
         }),
       }
     );
@@ -57,7 +57,7 @@ const AdminPaymentItem = ({ payment }) => {
         </td>
 
         <td>
-          <button class="btn btn-danger btn-block" onClick={RejectState}>
+          <button class="btn btn-danger btn-block" onClick={DeliverState}>
             Reject
           </button>
         </td>

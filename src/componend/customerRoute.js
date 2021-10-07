@@ -7,6 +7,9 @@ import CustomerLogin from "./projecManager/customerLogin";
 import CustomerRegister from "./projecManager/customerRegister";
 import CustomerPayment from "./projecManager/customerPayment";
 import CutomerPaymentHistory from "./projecManager/cutomerPaymentHistory";
+import ApprovedOrder from "./projecManager/approvedOrder";
+import RejectOrder from "./projecManager/rejectOrder";
+import PendingOrder from "./projecManager/pendingOrder";
 
 const customerRoute = () => {
   return (
@@ -37,6 +40,18 @@ const customerRoute = () => {
 
       <Route path="/paymentHistory" exact>
         <CutomerPaymentHistory />
+      </Route>
+
+      <Route path="/approvedOrder" exact>
+        <ApprovedOrder />
+      </Route>
+
+      <Route path="/pendingOrder" exact>
+        <PendingOrder />
+      </Route>
+
+      <Route path="/rejectOrder" exact>
+        <RejectOrder />
       </Route>
     </React.Fragment>
   );
